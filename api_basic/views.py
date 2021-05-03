@@ -25,12 +25,16 @@ def article_list(request):
 @csrf_exempt
 def voice_to_text(request):
     if request.method == 'POST':
+        print('hello')
         data = JSONParser().parse(request)
-        r = sr.Recognizer()
-        r.energy_threshold = 300
-        audio_file = sr.AudioFile(data)
-        with audio_file as source:
-            audio = r.record(source, duration=5)
+        print(data)
+        return JsonResponse("hello", status=200, safe=False)
 
-        print(r.recognize_google(audio))
-        return JsonResponse(r.recognize_google(audio), status=200, safe=False)
+        # return data
+        # r = sr.Recognizer()
+        # r.energy_threshold = 300
+        # audio_file = sr.AudioFile(data)
+        # with audio_file as source:
+        #     audio = r.record(source, duration=5)
+        #
+        # return JsonResponse(r.recognize_google(audio), status=200, safe=False)
