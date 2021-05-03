@@ -25,9 +25,10 @@ def article_list(request):
 @csrf_exempt
 def voice_to_text(request):
     if request.method == 'POST':
+        data = JSONParser().parse(request)
         r = sr.Recognizer()
         r.energy_threshold = 300
-        audio_file = sr.AudioFile("")
+        audio_file = sr.AudioFile(data)
         with audio_file as source:
             audio = r.record(source, duration=5)
 
