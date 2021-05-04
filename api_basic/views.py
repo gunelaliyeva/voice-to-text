@@ -25,13 +25,9 @@ def article_list(request):
 @csrf_exempt
 def voice_to_text(request):
     if request.method == 'POST':
-        # # print('hello')
-        # data = JSONParser().parse(request)
-        # # print(data)
-        return JsonResponse({"name": "hello"}, status=200, safe=False)
-
-    elif request.method == 'GET':
-        return JsonResponse({"name": "hello"}, status=200, safe=False)
+        data = JSONParser().parse(request)
+        print(data)
+        return JsonResponse({"data": data}, status=200, safe=False)
 
         # return data
         # r = sr.Recognizer()
