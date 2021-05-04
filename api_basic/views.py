@@ -28,13 +28,7 @@ def voice_to_text(request):
         # print('hello')
         data = JSONParser().parse(request)
         # print(data)
-        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-        if x_forwarded_for:
-            ip = x_forwarded_for.split(',')[0]
-        else:
-            ip = request.META.get('REMOTE_ADDR')
-        print(ip)
-        return JsonResponse("hello", status=200, safe=False)
+        return JsonResponse({"name": "hello"}, status=200, safe=False)
 
     elif request.method == 'GET':
         return JsonResponse({"name": "hello"}, status=200, safe=False)
