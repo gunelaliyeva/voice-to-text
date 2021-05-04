@@ -5,6 +5,8 @@ from rest_framework.parsers import JSONParser
 from .models import Article
 from .serializers import ArticleSerializer
 import speech_recognition as sr
+import pybase64
+import base64
 
 @csrf_exempt
 def article_list(request):
@@ -27,6 +29,8 @@ def voice_to_text(request):
     if request.method == 'POST':
         data = JSONParser().parse(request)
         print(data)
+        audio = base64.decodestring(data.data)
+        print(type(audio))
         return JsonResponse({"data": data}, status=200, safe=False)
 
         # return data
