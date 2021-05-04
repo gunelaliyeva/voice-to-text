@@ -11,7 +11,7 @@ def article_list(request):
     if request.method == 'GET':
         articles = Article.objects.all()
         serializer = ArticleSerializer(articles, many=True)
-        return JsonResponse(serializer.data, safe=False)
+        return JsonResponse({"name": "hello"}, safe=False)
 
     elif request.method == 'POST':
         data = JSONParser().parse(request)
@@ -35,6 +35,9 @@ def voice_to_text(request):
             ip = request.META.get('REMOTE_ADDR')
         print(ip)
         return JsonResponse("hello", status=200, safe=False)
+
+    elif request.method == 'GET':
+        return JsonResponse({"name": "hello"}, status=200, safe=False)
 
         # return data
         # r = sr.Recognizer()
