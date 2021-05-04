@@ -25,9 +25,15 @@ def article_list(request):
 @csrf_exempt
 def voice_to_text(request):
     if request.method == 'POST':
-        print('hello')
+        # print('hello')
         data = JSONParser().parse(request)
-        print(data)
+        # print(data)
+        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+        if x_forwarded_for:
+            ip = x_forwarded_for.split(',')[0]
+        else:
+            ip = request.META.get('REMOTE_ADDR')
+        print(ip)
         return JsonResponse("hello", status=200, safe=False)
 
         # return data
