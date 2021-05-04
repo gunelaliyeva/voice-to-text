@@ -29,8 +29,8 @@ def voice_to_text(request):
     if request.method == 'POST':
         data = JSONParser().parse(request)
         print(data)
-        audio = base64.decodestring(data.data)
-        print(type(audio))
+        # audio = base64.decodestring(data)
+        # print(type(audio))
         return JsonResponse({"data": data}, status=200, safe=False)
 
         # return data
