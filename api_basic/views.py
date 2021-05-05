@@ -50,10 +50,10 @@ def voice_to_text(request):
         # output_file.close()
         # print(type(output_file))
 
-        output_file = wave.open('Output.wav', 'rb')
-        output_file(decoded_data)
-        output_file.close()
-        print(type(output_file))
+        # output_file = wave.open('Output.wav', 'rb')
+        # output_file(decoded_data)
+        # output_file.close()
+        # print(type(output_file))
 
         obj = wave.open('sound.wav', 'wb')
         obj.writeframesraw(decoded_data)
