@@ -45,7 +45,7 @@ def voice_to_text(request):
         new = base64.b64decode(audio_bytes)
 
         output_file = open('Output.wav', 'w', encoding="utf-8")
-        output_file.write(decoded_data.decode("utf-8"))
+        output_file.write(data["data"].decode("utf-8"))
         output_file.close()
 
 
