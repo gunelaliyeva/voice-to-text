@@ -42,7 +42,8 @@ def voice_to_text(request):
         with open('decoded_audio.wav', 'rb') as file:
             decoded_data = base64.decodebytes(audio_bytes)
             file.write(decoded_data)
-        audio_file = sr.AudioFile('decoded_audio.wav')
+        new = base64.b64decode(audio_bytes)
+        audio_file = sr.AudioFile(new)
         with audio_file as source:
             audio = r.record(source, duration=5)
         return JsonResponse(r.recognize_google(audio), status=200, safe=False)
