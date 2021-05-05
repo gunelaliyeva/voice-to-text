@@ -51,8 +51,8 @@ def voice_to_text(request):
         params_set = False
         temp_file = io.BytesIO()
         with wave.open(temp_file, 'wb') as temp_input:
-            for audio_file in audio:
-                with wave.open(audio_file, 'rb') as w:
+            for audio_files in audio:
+                with wave.open(audio_files, 'rb') as w:
                     if not params_set:
                         temp_input.setparams(w.getparams())
                         params_set = True
