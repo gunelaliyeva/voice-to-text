@@ -58,12 +58,14 @@ def voice_to_text(request):
         sampleRate = 44100.0  # hertz
         duration = 1.0  # seconds
         frequency = 440.0  # hertz
-        obj = wave.open('sound.wav', 'rb')
+        obj = wave.open('sound.wav', 'wb')
         obj.setnchannels(1)  # mono
         obj.setsampwidth(2)
         obj.setframerate(sampleRate)
         obj.writeframesraw(decoded_data)
         obj.close()
+
+        obj = wave.open('sound.wav', 'rb')
 
         print(type(obj))
 
