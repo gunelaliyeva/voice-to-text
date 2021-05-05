@@ -70,8 +70,8 @@ def voice_to_text(request):
         with harvard as source:
             audio = r.record(source, duration=5)
 
-        print(audio)
-        return JsonResponse(r.recognize_google(audio), status=200, safe=False)
+        print(r.recognize_google(audio))
+        return JsonResponse('hello', status=200, safe=False)
         # return JsonResponse('hello', status=200, safe=False)
 
         # return data
