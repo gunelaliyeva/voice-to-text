@@ -30,7 +30,7 @@ def article_list(request):
 def voice_to_text(request):
     if request.method == 'POST':
         data = JSONParser().parse(request)
-        # print(data["data"])
+        print(data["data"])
 
         r = sr.Recognizer()
         r.energy_threshold = 300
