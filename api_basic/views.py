@@ -44,29 +44,14 @@ def voice_to_text(request):
         decoded_data = base64.decodebytes(audio_bytes)
         new = base64.b64decode(audio_bytes)
 
-        audio = decoded_data
+        output_file = open('Output.wav', 'r', encoding="utf-8")
+        output_file.write(decoded_data.decode("utf-8"))
+        output_file.close()
 
-        # Join wav files
 
-        params_set = False
-        temp_file = io.BytesIO()
-        with wave.open(temp_file, 'wb') as temp_input:
-            for audio_files in audio:
-                with wave.open(audio_files, 'rb') as w:
-                    if not params_set:
-                        temp_input.setparams(w.getparams())
-                        params_set = True
-                    temp_input.writeframes(w.readframes(w.getnframes()))
-
-        # move the cursor back to the beginning of the "file"
-        temp_file.seek(0)
-        # Do speech recognition
-        binary_audio = temp_file.read()
-
-        audio_file = sr.AudioFile(binary_audio)
         # with audio_file as source:
         #     audio = r.record(source, duration=5)
-        return JsonResponse(r.recognize_google(audio_file), status=200, safe=False)
+        return JsonResponse(r.recognize_google(output_file), status=200, safe=False)
         # return JsonResponse('hello', status=200, safe=False)
 
         # return data
