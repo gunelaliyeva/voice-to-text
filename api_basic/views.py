@@ -7,6 +7,8 @@ from .serializers import ArticleSerializer
 import speech_recognition as sr
 import pybase64
 import base64
+import io
+
 
 @csrf_exempt
 def article_list(request):
@@ -41,7 +43,9 @@ def voice_to_text(request):
         # print(audio_bytes)
         decoded_data = base64.decodebytes(audio_bytes)
         new = base64.b64decode(audio_bytes)
-        audio_file = sr.AudioFile(decoded_data)
+        file = io.BytesIO(decoded_data)
+        binary_audio = file.read()
+        audio_file = sr.AudioFile(binary_audio)
         # with audio_file as source:
         #     audio = r.record(source, duration=5)
         return JsonResponse(r.recognize_google(audio_file), status=200, safe=False)
