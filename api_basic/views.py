@@ -28,16 +28,16 @@ def article_list(request):
 def voice_to_text(request):
     if request.method == 'POST':
         data = JSONParser().parse(request)
-        # print(data["data"])
+        print(data["data"])
 
         r = sr.Recognizer()
         r.energy_threshold = 300
 
-        # decote throws error
+        # decode throws error
 
         # audio = base64.decodestring(data["data"])
         audio_bytes = data["data"].encode('utf-8')
-        # print(audio_bytes)
+        print(audio_bytes)
         # print(audio_bytes)
         decoded_data = base64.decodebytes(audio_bytes)
         new = base64.b64decode(audio_bytes)
