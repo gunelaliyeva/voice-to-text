@@ -38,15 +38,15 @@ def voice_to_text(request):
         # decode throws error
 
         # audio = base64.decodestring(data["data"])
-        audio_bytes = data["data"].encode('utf-8')
+        # audio_bytes = data["data"].decode('utf-8')
         # print(audio_bytes)
         # print(audio_bytes)
-        decoded_data = base64.decodebytes(data["data"])
+        decoded_data = base64.decodestring(data["data"])
         print(decoded_data)
-        new = base64.b64decode(audio_bytes)
+        # new = base64.b64decode(audio_bytes)
 
         output_file = open('Output.wav', 'w')
-        output_file.write(decoded_data.decode())
+        output_file.write(decoded_data)
         output_file.close()
 
 
