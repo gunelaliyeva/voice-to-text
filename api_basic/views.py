@@ -28,7 +28,7 @@ def article_list(request):
 def voice_to_text(request):
     if request.method == 'POST':
         data = JSONParser().parse(request)
-        print(data["data"])
+        # print(data["data"])
 
         r = sr.Recognizer()
         r.energy_threshold = 300
@@ -37,12 +37,15 @@ def voice_to_text(request):
 
         # audio = base64.decodestring(data["data"])
         audio_bytes = data["data"].encode('utf-8')
-        decoded_data = base64.decodebytes(audio_bytes)
-        # print(type(audio))
-        audio_file = sr.AudioFile(decoded_data)
-        with audio_file as source:
-            audio = r.record(source, duration=5)
-        return JsonResponse(r.recognize_google(audio), status=200, safe=False)
+        print(audio_bytes)
+        # print(audio_bytes)
+        # decoded_data = base64.decodebytes(audio_bytes)
+        # # print(type(audio))
+        # audio_file = sr.AudioFile(decoded_data)
+        # with audio_file as source:
+        #     audio = r.record(source, duration=5)
+        # return JsonResponse(r.recognize_google(audio), status=200, safe=False)
+        return JsonResponse('hello', status=200, safe=False)
 
         # return data
 
