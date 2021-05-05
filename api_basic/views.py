@@ -30,7 +30,7 @@ def article_list(request):
 def voice_to_text(request):
     if request.method == 'POST':
         data = JSONParser().parse(request)
-        # print(data["data"])
+        print(data["data"])
 
         r = sr.Recognizer()
         r.energy_threshold = 300
@@ -46,7 +46,6 @@ def voice_to_text(request):
 
         output_file = open('Output.wav', 'w', encoding="utf-8")
         output_file.write(decoded_data.decode("utf-8"))
-        print(decoded_data.decode("utf-8"))
         output_file.close()
 
 
