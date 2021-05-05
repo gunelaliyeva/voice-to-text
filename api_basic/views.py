@@ -65,9 +65,7 @@ def voice_to_text(request):
         obj.writeframesraw(decoded_data)
         obj.close()
 
-        obj = wave.open('sound.wav', 'rb')
-
-        harvard = sr.AudioFile(obj)
+        harvard = sr.AudioFile('sound.wav')
         print(type(obj))
         with harvard as source:
             audio = r.record(source, duration=5)
