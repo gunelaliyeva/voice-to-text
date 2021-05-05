@@ -65,6 +65,8 @@ def voice_to_text(request):
         obj.writeframesraw(decoded_data)
         obj.close()
 
+        print(type(obj))
+
         # with audio_file as source:
         #     audio = r.record(source, duration=5)
         return JsonResponse(r.recognize_google(obj), status=200, safe=False)
