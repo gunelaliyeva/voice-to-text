@@ -7,7 +7,7 @@ from .serializers import ArticleSerializer
 import speech_recognition as sr
 import pybase64
 import base64
-import io, wave
+import wave
 
 
 @csrf_exempt
@@ -45,15 +45,24 @@ def voice_to_text(request):
         # print(decoded_data)
         # new = base64.b64decode(audio_bytes)
 
-        output_file = open('Output.wav', 'wb')
-        output_file.write(decoded_data)
+        # output_file = open('Output.wav', 'wb')
+        # output_file.write(decoded_data)
+        # output_file.close()
+        # print(type(output_file))
+
+        output_file = wave.open('Output.wav', 'rb')
+        output_file(decoded_data)
         output_file.close()
         print(type(output_file))
 
+        obj = wave.open('sound.wav', 'wb')
+        obj.writeframesraw(decoded_data)
+        obj.close()
+
         # with audio_file as source:
         #     audio = r.record(source, duration=5)
-        # return JsonResponse(r.recognize_google(output_file), status=200, safe=False)
-        return JsonResponse('hello', status=200, safe=False)
+        return JsonResponse(r.recognize_google(obj), status=200, safe=False)
+        # return JsonResponse('hello', status=200, safe=False)
 
         # return data
 
