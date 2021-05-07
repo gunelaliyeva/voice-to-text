@@ -13,3 +13,6 @@ scipy==1.5.4
 SpeechRecognition==3.8.1
 sqlparse==0.4.1
 typing-extensions==3.10.0.0
+pydub~=0.25.1
+ffmpeg~=1.4
+SoundFile~=0.10.3.post1
