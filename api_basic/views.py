@@ -3,8 +3,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 import speech_recognition as sr
-import base64, os
-import soundfile as sf
+import base64
 
 @csrf_exempt
 def voice_to_text(request):
