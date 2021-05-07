@@ -1,34 +1,10 @@
-from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
+import wave
+from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
-from .models import Article
-from .serializers import ArticleSerializer
 import speech_recognition as sr
-import ffmpeg
-from scipy.io import wavfile
-from playsound import playsound
-import pybase64
-import base64
-import wave
-import numpy as np
-
-
-@csrf_exempt
-def article_list(request):
-    if request.method == 'GET':
-        articles = Article.objects.all()
-        serializer = ArticleSerializer(articles, many=True)
-        return JsonResponse({"name": "hello"}, safe=False)
-
-    elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = ArticleSerializer(data=data)
-
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, status=201)
-        return JsonResponse(serializer.errors, status=400)
+import base64, os
+import soundfile as sf
 
 @csrf_exempt
 def voice_to_text(request):
@@ -70,12 +46,14 @@ def voice_to_text(request):
 
         # obj = wave.open('sound.wav', 'r')
 
-        wav_file = open('hello.wav', 'wb')
+        wav_file = wave.open('hello.wav', 'wb')
         # y = (np.iinfo(np.int32).max * (decoded_data / np.abs(decoded_data).max())).astype(np.int32)
         # print(decoded_data)
-        # wav_file.setnchannels(2)
-        # wav_file.setsampwidth(2)
-        wav_file.write(decoded_data)
+        wav_file.setnchannels(1)
+        wav_file.setframerate(44100.0 )
+        wav_file.setsampwidth(2)
+        wav_file.writeframes(decoded_data)
+        wav_file.close()
         # wav_file.close()
         # print(type(open('sound.wav')))
         # playsound(wav_file.name)
@@ -99,15 +77,30 @@ def voice_to_text(request):
         # stream = ffmpeg.output(stream, 'temp5.wav')
         # print(stream)
 
+        # src = "C:/Users/Gunel/Desktop/diplom isi/voice-to-text/hello.mp3"
+        # dst = "hello9.wav"
+        #
+        # # convert wav to mp3
+        # sound = AudioSegment.from_mp3(src)
+        # # sound.export(dst, format="wav")
+
+        # AudioSegment.converter = "C:/Users/Gunel/Desktop/diplom isi/voice-to-text/ffmpeg.exe"
+        # print(AudioSegment.converter)
+        # AudioSegment.ffprobe = os.getcwd() + "\\ffprobe.exe"
+
+        # AudioSegment.converter = "C:/users/gunel/appData/local/programs/python/python36/lib/site-packages/ffmpeg/_ffmpeg"
+        # song = AudioSegment.from_mp3(file="hello.mp3")
+        # song.export("new.wav", format="wav")
+
         harvard = sr.AudioFile('hello.wav')
         # # print(type(harvard))
         with harvard as source:
             audio = r.record(source, duration=5)
         #
-        # print(r.recognize_google(audio))
-        return JsonResponse(r.recognize_google(audio), status=200, safe=False)
+        # print(r.recognize_google(audio, show_all=True))
+        return JsonResponse(r.recognize_google(audio, show_all=True), status=200, safe=False)
         # return JsonResponse('hello', status=200, safe=False)
-
+        #
         # return data
 
         #
