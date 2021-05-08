@@ -11,8 +11,9 @@ def voice_to_text(request):
         data = JSONParser().parse(request)
 
         r = sr.Recognizer()
-        r.energy_threshold = 300
+        r.energy_threshold = 50
         decoded_data = base64.b64decode(data["data"])
+        print(data["data"])
 
         wav_file = wave.open('hello.wav', 'wb')
         wav_file.setnchannels(1)
@@ -21,7 +22,7 @@ def voice_to_text(request):
         wav_file.writeframes(decoded_data)
         wav_file.close()
 
-        harvard = sr.AudioFile('hello.wav')
+        harvard = sr.WavFile('hello.wav')
         with harvard as source:
             audio = r.record(source, duration=25)
-        return JsonResponse(r.recognize_google(audio), status=200, safe=False)
+        return JsonResponse(r.recognize_google(audio, show_all=True), status=200, safe=False)
