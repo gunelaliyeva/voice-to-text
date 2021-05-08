@@ -23,5 +23,5 @@ def voice_to_text(request):
 
         harvard = sr.AudioFile('hello.wav')
         with harvard as source:
-            audio = r.record(source, duration=5)
-        return JsonResponse(r.recognize_google(audio, show_all=True), status=200, safe=False)
+            audio = r.record(source, duration=25)
+        return JsonResponse(r.recognize_google(audio), status=200, safe=False)
