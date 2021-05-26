@@ -47,7 +47,7 @@ def voice_to_text(request):
         r.energy_threshold = 300
         decoded_data = base64.b64decode(data["data"], validate=True)
 
-        # print(decoded_data)
+        print(decoded_data)
         # wav_file = wave.open('sound.wav', 'rb')
         # print(wav_file.getnchannels())
         # print(wav_file.getframerate())
@@ -65,9 +65,9 @@ def voice_to_text(request):
         file.setsampwidth(2)
         file.writeframes(decoded_data)
         file.close()
-        open('hi.wav', 'wb').write(decoded_data)
+        # open('hi.wav', 'wb').write(decoded_data)
         harvard = sr.AudioFile('hello5.wav')
         with harvard as source:
-            audio = r.record(source, duration=25)
+            audio = r.record(source)
         # return JsonResponse('hello', status=200, safe=False)
         return JsonResponse(r.recognize_google(audio), status=200, safe=False)
