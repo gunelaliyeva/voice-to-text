@@ -59,14 +59,14 @@ def voice_to_text(request):
 
         # genFile(44100, 16, 2, decoded_data)
 
-        # file = wave.open('hello4.wav', 'wb')
-        # file.setnchannels(2)
-        # file.setframerate(44100)
-        # file.setsampwidth(2)
-        # file.writeframes(decoded_data)
-        # file.close()
+        file = wave.open('hello5.wav', 'wb')
+        file.setnchannels(2)
+        file.setframerate(44100)
+        file.setsampwidth(2)
+        file.writeframes(decoded_data)
+        file.close()
         open('hi.wav', 'wb').write(decoded_data)
-        harvard = sr.AudioFile('hi.wav')
+        harvard = sr.AudioFile('hello5.wav')
         with harvard as source:
             audio = r.record(source, duration=25)
         # return JsonResponse('hello', status=200, safe=False)
