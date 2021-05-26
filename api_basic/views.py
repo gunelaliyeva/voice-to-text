@@ -47,7 +47,7 @@ def voice_to_text(request):
         r.energy_threshold = 300
         decoded_data = base64.b64decode(data["data"], validate=True)
 
-        print(decoded_data)
+        print(data)
         # wav_file = wave.open('sound.wav', 'rb')
         # print(wav_file.getnchannels())
         # print(wav_file.getframerate())
